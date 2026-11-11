@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getCategories } from './src/models/categories.js';
 
 dotenv.config();
 
@@ -30,7 +31,13 @@ app.get('/projects', async (req, res) => {
 });
 
 app.get('/categories', async (req, res) => {
-  res.render('categories', { title: 'Service Project Categories' });
+  try {
+    const categories = await getCategories();
+    res.render('categories', { title: 'Service Project Categories', categories });
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Inicio del servidor
