@@ -1,11 +1,7 @@
-const pool = require('../database/db');
+import pool from '../database/db.js'; // O ajusta la ruta si tu db usa otra extensión
 
-async function getCategories() {
+export async function getCategories() {
   const sql = 'SELECT * FROM categories ORDER BY category_name';
   const result = await pool.query(sql);
   return result.rows;
 }
-
-module.exports = {
-  getCategories
-};
