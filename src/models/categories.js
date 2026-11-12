@@ -1,4 +1,4 @@
-const pool = require('../database/db'); // Ajusta la ruta de tu conexión si es diferente
+const pool = require('../database/db');
 
 async function getCategories() {
   const sql = 'SELECT * FROM categories ORDER BY category_name';
